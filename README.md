@@ -37,6 +37,8 @@ mysql -u root -p < database\hms_full_database.sql
 
 This file **drops and recreates** the `hms` database, creates all tables, the seven demo users and sample data. Delete the sample-data section at the bottom of the file if you want an empty system.
 
+Alternatively, create an empty database named `hms` and just start the server: when it finds no tables it creates them (and the demo data) itself.
+
 **2. Configure the server.**
 
 ```
@@ -91,6 +93,8 @@ Username is the role name, and the password is the role name plus `123`.
 | lab | lab123 |
 | pharmacist | pharmacist123 |
 | accountant | accountant123 |
+
+On a hosted site only `admin` stays active, with the password you set in `ADMIN_PASSWORD` (see [DEPLOY.md](DEPLOY.md)); the other demo accounts are switched off.
 
 **Change these before using real data** (Users screen for admin, "My password" for everyone else).
 
@@ -155,6 +159,7 @@ See [DEPLOY.md](DEPLOY.md) for Railway (recommended) and Render.
 - Daily dump at 02:00 and a full dump every Sunday at 03:00, saved in `Backend/backups/`.
 - Restore: `cd Backend` then `npm run restore -- backups/<file>.sql`
 - Copy `Backend/backups/` and `Backend/uploads/` to separate storage regularly.
+- Folders can be moved with `BACKUP_DIR` and `UPLOAD_DIR` in `.env` (on a host, point them at a persistent volume).
 
 ## Troubleshooting
 
@@ -164,7 +169,7 @@ See [DEPLOY.md](DEPLOY.md) for Railway (recommended) and Render.
 | `Access denied for user` | Check `DB_USER` and `DB_PASS` in `Backend/.env`, then restart the server |
 | `Table ... doesn't exist` | Load `database/hms_full_database.sql` |
 | Cannot sign in | Make sure the database was created from `hms_full_database.sql` (it includes the demo users) |
-| Page shows "Cannot GET" on port 4000 | Port 4000 is the API only. Open http://localhost:5173 |
+| Page shows "Cannot GET" on port 4000 | With `npm run dev`, port 4000 is the API only. Open http://localhost:5173. After `npm run build` in both folders, port 4000 serves the whole site |
 
 ## Security notes
 
@@ -174,4 +179,4 @@ See [DEPLOY.md](DEPLOY.md) for Railway (recommended) and Render.
 
 ## Not included
 
-Mobile app, patient portal, SMS and email notifications, telemedicine, insurance integration, AI decision support, biometric login, cloud deployment, automated tests, and high availability setup.
+Mobile app, patient portal, SMS and email notifications, telemedicine, insurance integration, AI decision support, biometric login, automated tests, and high availability setup.
