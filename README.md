@@ -152,7 +152,7 @@ hms/
 
 ## Hosting
 
-See [DEPLOY.md](DEPLOY.md) for Railway (recommended) and Render.
+See [DEPLOY.md](DEPLOY.md) for Railway (recommended).
 
 ## Backups
 
