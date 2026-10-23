@@ -1,7 +1,11 @@
-import mysql, { ResultSetHeader, RowDataPacket } from 'mysql2/promise';
-import { config } from './config.js';
+import mysql, { ResultSetHeader, RowDataPacket } from "mysql2/promise";
+import { config } from "./config.js";
 
-const pool = mysql.createPool({ ...config.db, dateStrings: true, connectionLimit: 10 });
+const pool = mysql.createPool({
+  ...config.db,
+  dateStrings: true,
+  connectionLimit: 10,
+});
 
 export type Row = Record<string, any>;
 export type Params = unknown[];
