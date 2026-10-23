@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Secrets (never commit these)
+.env
+.env.*
+!.env.example
+
+# Patient data and backups (sensitive)
+Backend/uploads/
+Backend/backups/
+
+# Build output
+Frontend/dist/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
